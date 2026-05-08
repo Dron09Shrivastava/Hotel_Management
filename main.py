@@ -1,6 +1,7 @@
 from guest import add_guest, view_guests
 from feedback import add_feedback,view_feedbacks
 from room import add_room, view_rooms, update_room_status, delete_room
+from employee import add_employee, view_employees, search_employee, delete_employee 
 while True:
     print("\n===== HOTEL MANAGEMENT SYSTEM =====")
     print("1. Guest Management.")
@@ -63,14 +64,24 @@ while True:
         while True:
             print("\n---Employee Management---")
             print("1. Add Employee")
-            print("2. View Employee")
-            print("3. Back")
-            
-            e_choice=input("Enter your choice:")
-            if e_choice=='3':
+            print("2. View Employees")
+            print("3. Search Employee")
+            print("4. Delete Employee")
+            print("5. Back")
+
+            e_choice=input("Enter your choice: ")
+            if e_choice == '1':
+                add_employee()
+            elif e_choice == '2':
+                view_employees()
+            elif e_choice == '3':
+                search_employee()
+            elif e_choice == '4':
+                delete_employee()
+            elif e_choice == '5':
                 break
             else:
-                print("Feature coming soon")
+                print("Invalid choice!")
                 
     #Service Management
     elif choice=='4':

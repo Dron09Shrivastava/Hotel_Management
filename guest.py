@@ -80,16 +80,34 @@ def view_guests():
     cursor = conn.cursor()
 
     query = """
-    SELECT g.name, g.phone, r.room_id, r.room_type, r.price
+    SELECT 
+        g.name,
+        g.phone,
+        g.check_in,
+        g.check_out,
+        r.room_id,
+        r.room_type,
+        r.price
     FROM guests g
-    JOIN rooms r ON g.room_id = r.room_id
+    JOIN rooms r 
+    ON g.room_id = r.room_id
     """
 
     cursor.execute(query)
     data = cursor.fetchall()
 
-    print("\nGuest Details with Room Info:")
+    print("\n===== Guest Details with Room Info =====")
+    print(f"Total Guests: {len(data)}")
     for row in data:
-        print(f"Name: {row[0]}, Phone: {row[1]}, Room ID: {row[2]}, Type: {row[3]}, Price: ₹{row[4]}")
+        print(f"""
+Guest Name   : {row[0]}
+Phone Number : {row[1]}
+Check-In     : {row[2]}
+Check-Out    : {row[3]}
+Room ID      : {row[4]}
+Room Type    : {row[5]}
+Room Price   : ₹{row[6]}
+----------------------------------------
+""")
 
     conn.close()
