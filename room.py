@@ -1,9 +1,9 @@
 from db_connection import get_connection
-from tabulate import tabulate
-
-
+from auth import verify_admin
 # ➤ Add Room
 def add_room():
+    if not verify_admin():
+        return
     room_type = input("Enter room type (Single/Double/Deluxe): ")
     price = int(input("Enter room price: "))
 
@@ -53,6 +53,8 @@ Phone: {row[5] if row[5] else "None"}
 
 # ➤ Update Room Status
 def update_room_status():
+    if not verify_admin():
+        return
     room_id = int(input("Enter room ID: "))
     status = input("Enter new status (Available/Booked): ")
 
@@ -74,6 +76,8 @@ def update_room_status():
 
 # ➤ Delete Room
 def delete_room():
+    if not verify_admin():
+        return
     room_id = int(input("Enter room ID to delete: "))
 
     conn = get_connection()

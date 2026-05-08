@@ -1,6 +1,9 @@
 from db_connection import get_connection
+from auth import verify_admin
 # Add Emplyoeee
 def add_employee():
+    if not verify_admin():
+        return
     conn = get_connection()
     cursor = conn.cursor()
 
@@ -21,6 +24,8 @@ def add_employee():
     print("Employee added successfully!")
 # View Employees
 def view_employees():
+    if not verify_admin():
+        return
     conn = get_connection()
     cursor = conn.cursor()
     query ="select * from employees"  
@@ -43,6 +48,8 @@ Address       : {row[6]}
 
 # Search Employee
 def search_employee():
+    if not verify_admin():
+        return
     emp_id = input("Enter Employee ID: ")
 
     conn = get_connection()
@@ -71,6 +78,8 @@ Address     : {row[6]}
 
 # Delete Employee
 def delete_employee():
+    if not verify_admin():
+        return
     conn = get_connection()
     cursor = conn.cursor()
     emp_id = input("Enter Employee ID to delete: ")

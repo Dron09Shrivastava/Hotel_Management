@@ -1,5 +1,5 @@
 from db_connection import get_connection
-
+from auth import verify_admin
 def add_guest():
     conn = get_connection()
     cursor = conn.cursor()
@@ -76,6 +76,8 @@ def add_guest():
     print(f" Room ID: {room_id} assigned to {name}")
 
 def view_guests():
+    if not verify_admin():
+        return
     conn = get_connection()
     cursor = conn.cursor()
 
