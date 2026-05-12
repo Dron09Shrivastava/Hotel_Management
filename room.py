@@ -56,7 +56,14 @@ def update_room_status():
     if not verify_admin():
         return
     room_id = int(input("Enter room ID: "))
-    status = input("Enter new status (Available/Booked): ")
+    status = input("Enter new status (Available/Occupied): ")
+
+    status = status.strip().lower()
+    if status == 'booked':
+        status = 'occupied'
+    elif status not in ('available', 'occupied'):
+        print("Invalid status. Use Available or Occupied.")
+        return
 
     conn = get_connection()
     cursor = conn.cursor()
